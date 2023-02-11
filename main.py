@@ -10,26 +10,42 @@ def create_number():
     return number_for_guessing
 
 def checking_number(guess_number):
-    number = input("Make a guess: ")
+    number = int(input("Make a guess: "))
     flag = False
     if number > guess_number:
-        print("Too low.")
-    elif number < guess_number:
         print("Too high.")
+    elif number < guess_number:
+        print("Too low.")
     else:
         print("You win")
         flag = True
-    if flag == False:
-        print("Guess again")
-    return  flag
+    return flag
 
+def loop_for_guessing(difficulty, guess_number):
+    i = difficulty
+    while i > 0:
+        print(f"You have {i} attempts remaining to guess the number")
+        flag = checking_number(guess_number)
+        if flag == True:
+            break
+        if i == 1:
+            print("You lose")
+        i -= 1
+
+def choose_difficulty(difficulty):
+    number = create_number()
+    if difficulty == 'hard':
+        loop_for_guessing(5, number)
+    else:
+        loop_for_guessing(10, number)
 
 
 
 
 def main():
-    start_text()
-    print(create_number())
+    difficulty = start_text()
+    choose_difficulty(difficulty)
+
 
 if __name__ == '__main__':
     main()
